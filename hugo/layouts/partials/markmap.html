@@ -1,0 +1,50 @@
+{{- /*
+  Render a markmap mindmap from markdown text.
+  Params (dict): content (markdown string), page, height (optional, default 70vh).
+  Shared by the `markmap` code-block render hook and any caller.
+  Includes a ⛶ fullscreen toggle for viewing large maps.
+*/ -}}
+{{- $content := .content -}}
+{{- $page := .page -}}
+{{- $height := .height | default "70vh" -}}
+
+{{- if not ($page.Scratch.Get "markmapCSS") -}}
+{{- $page.Scratch.Set "markmapCSS" true -}}
+<style>
+.markmap-wrap{position:relative;border:1px solid rgba(128,128,128,.3);border-radius:.5rem;margin:.6rem 0;overflow:hidden}
+.markmap-wrap .markmap{display:block;width:100%}
+.markmap-wrap .markmap>svg{display:block;width:100%;height:100%}
+.mm-fs-btn{position:absolute;top:.45rem;right:.45rem;z-index:3;background:rgba(128,128,128,.18);border:none;border-radius:.35rem;cursor:pointer;font-size:1.05rem;line-height:1;padding:.25rem .45rem;color:inherit}
+.mm-fs-btn:hover{background:rgba(128,128,128,.35)}
+.markmap-wrap:fullscreen{background:#fff;border-radius:0}
+.dark .markmap-wrap:fullscreen{background:#0f1420}
+.markmap-wrap:fullscreen .markmap{height:100vh}
+</style>
+{{- end -}}
+<div class="markmap-wrap">
+  <button class="mm-fs-btn" type="button" title="Toggle fullscreen" aria-label="Toggle fullscreen">⛶</button>
+  <div class="markmap" style="height:{{ $height }}">
+    <script type="text/template">
+{{ $content | safeHTML }}
+    </script>
+  </div>
+</div>
+{{- if not ($page.Scratch.Get "markmapJS") -}}
+{{- $page.Scratch.Set "markmapJS" true -}}
+<script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.18"></script>
+<script>
+(function(){
+  if(window.__mmFS)return;window.__mmFS=true;
+  document.addEventListener("click",function(e){
+    var b=e.target.closest&&e.target.closest(".mm-fs-btn");if(!b)return;
+    var w=b.closest(".markmap-wrap");if(!w)return;
+    if(document.fullscreenElement===w){document.exitFullscreen();}
+    else if(w.requestFullscreen){w.requestFullscreen();}
+  });
+  // markmap refits to the new size when the window "resizes"
+  document.addEventListener("fullscreenchange",function(){
+    setTimeout(function(){window.dispatchEvent(new Event("resize"));},120);
+  });
+})();
+</script>
+{{- end -}}

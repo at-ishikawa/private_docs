@@ -1,0 +1,16 @@
+{{- /*
+  Drop-in replacement for the relearn theme's `children` shortcode.
+  Supported params: sort ("modifieddate"|"date"|"title"|"weight"), depth (int),
+  description (bool), showhidden (bool), page (path).
+  https://mcshelby.github.io/hugo-theme-relearn/shortcodes/children/
+*/ -}}
+{{- $depth := int (.Get "depth" | default 1) -}}
+{{- $sort := .Get "sort" | default "weight" -}}
+{{- $description := eq (printf "%v" (.Get "description")) "true" -}}
+{{- $showhidden := eq (printf "%v" (.Get "showhidden")) "true" -}}
+{{- $pageParam := .Get "page" -}}
+{{- $page := .Page -}}
+{{- if $pageParam -}}
+  {{- with .Page.GetPage $pageParam }}{{ $page = . }}{{ end -}}
+{{- end -}}
+{{- partial "children-tree.html" (dict "page" $page "depth" $depth "description" $description "sort" $sort "showhidden" $showhidden) -}}

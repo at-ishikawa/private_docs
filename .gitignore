@@ -1,0 +1,4 @@
+# Local TTS setup for `make audio` (large; regenerate rather than commit)
+.venv-tts/
+.cache/
+*.wav

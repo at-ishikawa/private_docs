@@ -1,0 +1,39 @@
+{{- /*
+  Recursive helper for the `children` shortcode (relearn compatibility).
+  Params (dict): page, depth, description, sort, showhidden
+*/ -}}
+{{- $page := .page -}}
+{{- $depth := .depth -}}
+{{- $description := .description -}}
+{{- $sort := .sort -}}
+{{- $showhidden := .showhidden -}}
+
+{{- $children := $page.Pages -}}
+{{- if not $showhidden -}}
+  {{- $children = where $children "Params.hidden" "!=" true -}}
+{{- end -}}
+
+{{- /* Sorting */ -}}
+{{- if eq $sort "modifieddate" -}}
+  {{- $children = sort $children "Lastmod" "desc" -}}
+{{- else if eq $sort "date" -}}
+  {{- $children = sort $children "Date" "desc" -}}
+{{- else if eq $sort "title" -}}
+  {{- $children = sort $children "Title" "asc" -}}
+{{- else -}}
+  {{- $children = sort $children "Weight" "asc" -}}
+{{- end -}}
+
+{{- if $children -}}
+<ul class="hextra-children">
+  {{- range $children -}}
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+    {{- if and $description .Description }} <span class="hextra-children-desc">— {{ .Description }}</span>{{ end -}}
+    {{- if gt $depth 1 -}}
+      {{- partial "children-tree.html" (dict "page" . "depth" (sub $depth 1) "description" $description "sort" $sort "showhidden" $showhidden) -}}
+    {{- end -}}
+  </li>
+  {{- end -}}
+</ul>
+{{- end -}}

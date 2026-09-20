@@ -1,0 +1,10 @@
+{{- /*
+  Code-block render hook: ```markmap fences become interactive mindmaps.
+
+    ```markmap
+    - Root
+      - Branch
+        - [Leaf with link](https://example.com)
+    ```
+*/ -}}
+{{ partial "markmap.html" (dict "content" .Inner "page" .Page "height" (.Attributes.height | default "70vh")) }}

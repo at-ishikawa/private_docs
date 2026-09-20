@@ -1,0 +1,192 @@
+{{- /*
+  Self-contained Kanban board. Pass the board's data as the shortcode's inner
+  content (YAML) — no page-global front matter, so you can have as many
+  independent boards on a page as you like.
+
+    {{< kanban hideDoneAfterDays=30 >}}
+    - title: Nvidia GPU
+      status: todo             # todo | wip | done (optional if subtasks given)
+      details: |              # inline markdown, shown in the ticket modal
+        Evaluation and investment in NVIDIA machine models.
+      subtasks:                # optional; makes this an "epic" with progress
+        - { title: Evaluation, status: todo }
+        - { title: Karpenter,  status: done }
+    - title: Invisalign
+      status: done
+      done: 2025-11-08         # completion date
+    {{< /kanban >}}
+
+  Clicking a card opens a modal ticket view. Epics without an explicit status
+  derive one from their subtasks. Done cards older than hideDoneAfterDays
+  (default 30) are hidden but kept in the source.
+*/ -}}
+
+{{- $page := .Page -}}
+{{- $uid := printf "kb%d" .Ordinal -}}
+{{- $days := int (.Get "hideDoneAfterDays" | default 30) -}}
+{{- $cutoff := now.AddDate 0 0 (mul $days -1) -}}
+
+{{- $list := slice -}}
+{{- with (trim .Inner "\n ") -}}
+  {{- /* Wrap in a .yaml-named resource so Unmarshal parses YAML (not CSV auto-detect) */ -}}
+  {{- $list = resources.FromString (printf "inline-kanban/%s-%s.yaml" $page.RelPermalink $uid) . | transform.Unmarshal -}}
+{{- end -}}
+
+{{- $columns := slice
+  (dict "key" "todo" "label" "To Do" "icon" "📋")
+  (dict "key" "wip"  "label" "In Progress" "icon" "🚧")
+  (dict "key" "done" "label" "Done" "icon" "✅")
+-}}
+
+{{- /* Normalize items (stable id) and derive epic status from subtasks */ -}}
+{{- $cards := slice -}}
+{{- range $i, $e := $list -}}
+  {{- $subs := $e.subtasks | default slice -}}
+  {{- $status := $e.status -}}
+  {{- if and (not $status) $subs -}}
+    {{- $wip := len (where $subs "status" "wip") -}}
+    {{- $doneK := len (where $subs "status" "done") -}}
+    {{- if gt $wip 0 -}}{{- $status = "wip" -}}
+    {{- else if eq $doneK (len $subs) -}}{{- $status = "done" -}}
+    {{- else -}}{{- $status = "todo" -}}{{- end -}}
+  {{- end -}}
+  {{- $cards = $cards | append (dict "id" $i "title" $e.title "status" (or $status "todo") "done" $e.done "details" $e.details "subs" $subs) -}}
+{{- end -}}
+
+{{- if not ($page.Scratch.Get "kanbanCSS") -}}
+{{- $page.Scratch.Set "kanbanCSS" true -}}
+<style>
+.kanban-board{display:flex;gap:1rem;overflow-x:auto;padding:.25rem 0 1rem;align-items:flex-start}
+.kanban-col{flex:1 1 0;min-width:240px;background:var(--kb-col-bg,#f4f5f7);border:1px solid var(--kb-border,#e3e6ea);border-radius:.6rem;padding:.75rem}
+.kanban-col-head{display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:.95rem;margin-bottom:.6rem;color:var(--kb-head,#374151)}
+.kanban-count{font-size:.75rem;font-weight:600;background:var(--kb-badge-bg,#e3e6ea);color:var(--kb-badge,#4b5563);border-radius:999px;padding:.05rem .5rem}
+.kanban-card{background:var(--kb-card-bg,#fff);color:var(--kb-title,#111827);border:1px solid var(--kb-border,#e3e6ea);border-left:3px solid var(--kb-accent,#6b7280);border-radius:.45rem;margin-bottom:.5rem;box-shadow:0 1px 2px rgba(0,0,0,.04);cursor:pointer;transition:box-shadow .12s,border-color .12s}
+.kanban-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.12);border-color:var(--kb-accent,#6b7280)}
+.kanban-card:focus-visible{outline:2px solid var(--kb-accent,#3b82f6);outline-offset:1px}
+.kanban-card.todo{--kb-accent:#3b82f6}
+.kanban-card.wip{--kb-accent:#f59e0b}
+.kanban-card.done{--kb-accent:#10b981}
+.kanban-card-face{display:flex;align-items:center;gap:.4rem;padding:.55rem .65rem;font-size:.9rem;line-height:1.35}
+.kanban-card-title{flex:1}
+.kanban-card.done .kanban-card-title{color:var(--kb-title-done,#6b7280)}
+.kanban-progress{font-size:.7rem;font-weight:600;background:var(--kb-badge-bg,#e3e6ea);color:var(--kb-badge,#4b5563);border-radius:999px;padding:.02rem .45rem;white-space:nowrap}
+.kanban-card-meta{margin:-.2rem .65rem .5rem;font-size:.7rem;color:var(--kb-meta,#9ca3af)}
+.kanban-empty{font-size:.8rem;color:var(--kb-meta,#9ca3af);font-style:italic;padding:.25rem}
+.kanban-hidden-note{font-size:.72rem;color:var(--kb-meta,#9ca3af);margin-top:.4rem;text-align:center}
+.kanban-modal{border:none;border-radius:.85rem;max-width:640px;width:min(640px,calc(100% - 1.5rem));max-height:85vh;padding:0;margin:auto;background:var(--kb-card-bg,#fff);color:var(--kb-title,#111827);box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.kanban-modal::backdrop{background:rgba(15,23,42,.62);backdrop-filter:blur(3px)}
+.kanban-modal[open]{animation:kbModalIn .16s ease-out}
+@keyframes kbModalIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
+.kanban-modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:1.15rem 1.35rem .5rem;border-left:5px solid var(--kb-accent,#6b7280);border-top-left-radius:.85rem}
+.kanban-modal-head.todo{--kb-accent:#3b82f6}.kanban-modal-head.wip{--kb-accent:#f59e0b}.kanban-modal-head.done{--kb-accent:#10b981}
+.kanban-modal-title{font-size:1.3rem;font-weight:700;margin:0;line-height:1.3}
+.kanban-modal-close{background:rgba(128,128,128,.15);border:none;font-size:1.1rem;cursor:pointer;color:var(--kb-meta,#6b7280);line-height:1;width:2rem;height:2rem;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.kanban-modal-close:hover{color:var(--kb-title,#111827);background:rgba(128,128,128,.3)}
+.kanban-modal-body{padding:.5rem 1.35rem 1.5rem;overflow-y:auto;max-height:calc(85vh - 5rem)}
+@media(max-width:480px){.kanban-modal{width:100%;max-width:100%;max-height:92vh;margin:auto auto 0;border-radius:.85rem .85rem 0 0}.kanban-modal-title{font-size:1.15rem}}
+.kanban-modal-metarow{display:flex;gap:.5rem;align-items:center;margin:.1rem 0 .7rem;font-size:.78rem;color:var(--kb-meta,#9ca3af)}
+.kanban-modal-body h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;color:var(--kb-meta,#9ca3af);margin:.9rem 0 .35rem}
+.kanban-details{font-size:.9rem}.kanban-details p{margin:.35rem 0}
+.kanban-subtasks{list-style:none;margin:.2rem 0 0;padding:0}
+.kanban-subtasks li{display:flex;align-items:center;gap:.5rem;margin:.3rem 0;font-size:.9rem}
+.st-badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;border-radius:.25rem;padding:.05rem .35rem;color:#fff;flex-shrink:0}
+.st-badge.todo{background:#3b82f6}.st-badge.wip{background:#f59e0b}.st-badge.done{background:#10b981}
+.kanban-subtasks li.done span:last-child{color:var(--kb-title-done,#9ca3af);text-decoration:line-through}
+.dark .kanban-col{--kb-col-bg:#1f2430;--kb-border:#333b4a;--kb-head:#d1d5db}
+.dark .kanban-count,.dark .kanban-progress{--kb-badge-bg:#333b4a;--kb-badge:#cbd5e1}
+.dark .kanban-card,.dark .kanban-modal{--kb-card-bg:#262c3a;--kb-border:#333b4a;--kb-title:#e5e7eb;--kb-meta:#9ca3af}
+.dark .kanban-card.done .kanban-card-title,.dark .kanban-subtasks li.done span:last-child{--kb-title-done:#9ca3af}
+.dark .kanban-card-meta,.dark .kanban-empty,.dark .kanban-hidden-note{--kb-meta:#6b7280}
+</style>
+{{- end -}}
+
+{{- /* Shared modal + open function, emitted once per page */ -}}
+{{- if not ($page.Scratch.Get "kanbanModal") -}}
+{{- $page.Scratch.Set "kanbanModal" true -}}
+<dialog class="kanban-modal" id="kanban-modal">
+  <div class="kanban-modal-head" id="kanban-modal-head">
+    <h3 class="kanban-modal-title" id="kanban-modal-title"></h3>
+    <button class="kanban-modal-close" aria-label="Close" onclick="document.getElementById('kanban-modal').close()">✕</button>
+  </div>
+  <div class="kanban-modal-body">
+    <div class="kanban-modal-metarow" id="kanban-modal-meta"></div>
+    <div id="kanban-modal-content"></div>
+  </div>
+</dialog>
+<script>
+window.__kanbanOpen=function(card){
+  var dlg=document.getElementById('kanban-modal');if(!dlg)return;
+  var st=card.dataset.status||'todo',done=card.dataset.done;
+  document.getElementById('kanban-modal-title').innerHTML=(document.getElementById(card.dataset.titleId)||{}).innerHTML||'';
+  document.getElementById('kanban-modal-head').className='kanban-modal-head '+st;
+  document.getElementById('kanban-modal-meta').innerHTML='<span class="st-badge '+st+'">'+st+'</span>'+(done?'<span>✔ '+done+'</span>':'');
+  document.getElementById('kanban-modal-content').innerHTML=(document.getElementById(card.dataset.bodyId)||{}).innerHTML||'';
+  if(typeof dlg.showModal==='function')dlg.showModal();else dlg.setAttribute('open','');
+};
+(function(){var d=document.getElementById('kanban-modal');if(d)d.addEventListener('click',function(e){if(e.target===d)d.close();});})();
+</script>
+{{- end -}}
+
+<div id="{{ $uid }}">
+<div class="kanban-board">
+{{- range $col := $columns -}}
+  {{- $inCol := where $cards "status" $col.key -}}
+  {{- $hidden := 0 -}}{{- $visible := slice -}}
+  {{- range $inCol -}}
+    {{- $show := true -}}
+    {{- if and (eq $col.key "done") .done -}}
+      {{- if (time.AsTime .done).Before $cutoff -}}{{- $show = false -}}{{- end -}}
+    {{- end -}}
+    {{- if $show -}}{{- $visible = $visible | append . -}}{{- else -}}{{- $hidden = add $hidden 1 -}}{{- end -}}
+  {{- end -}}
+  <div class="kanban-col">
+    <div class="kanban-col-head"><span>{{ $col.icon }} {{ $col.label }}</span><span class="kanban-count">{{ len $visible }}</span></div>
+    {{- range $c := $visible -}}
+      {{- $hasSubs := gt (len $c.subs) 0 -}}
+      <div class="kanban-card {{ $c.status }}" data-kb data-title-id="{{ $uid }}-t-{{ $c.id }}" data-body-id="{{ $uid }}-b-{{ $c.id }}" data-status="{{ $c.status }}"{{ with $c.done }} data-done="{{ (time.AsTime .).Format "2006-01-02" }}"{{ end }} role="button" tabindex="0" aria-label="Open ticket: {{ $c.title }}">
+        <div class="kanban-card-face">
+          <span class="kanban-card-title">{{ $c.title | $page.RenderString }}</span>
+          {{- if $hasSubs -}}<span class="kanban-progress">{{ len (where $c.subs "status" "done") }}/{{ len $c.subs }}</span>{{- end -}}
+        </div>
+        {{- if and (eq $col.key "done") $c.done -}}
+          {{- $dt := time.AsTime $c.done -}}
+          <div class="kanban-card-meta">✔ {{ $dt.Format "2006-01-02" }} · {{ int (div (now.Sub $dt).Hours 24) }}d ago</div>
+        {{- end -}}
+      </div>
+    {{- else -}}
+      <div class="kanban-empty">Nothing here</div>
+    {{- end -}}
+    {{- if gt $hidden 0 -}}<div class="kanban-hidden-note">+{{ $hidden }} older item{{ if gt $hidden 1 }}s{{ end }} hidden</div>{{- end -}}
+  </div>
+{{- end -}}
+</div>
+</div>
+
+{{- /* Hidden per-card ticket content (unique ids per board via $uid) */ -}}
+<div hidden>
+{{- range $c := $cards -}}
+  <div id="{{ $uid }}-t-{{ $c.id }}">{{ $c.title | $page.RenderString }}</div>
+  <div id="{{ $uid }}-b-{{ $c.id }}">
+    {{- with $c.details }}<div class="kanban-details">{{ . | $page.RenderString }}</div>{{ end -}}
+    {{- if gt (len $c.subs) 0 -}}
+      <h4>Subtasks ({{ len (where $c.subs "status" "done") }}/{{ len $c.subs }})</h4>
+      <ul class="kanban-subtasks">
+        {{- range $c.subs -}}{{- $s := or .status "todo" -}}
+          <li class="{{ $s }}"><span class="st-badge {{ $s }}">{{ $s }}</span><span>{{ .title | $page.RenderString }}</span></li>
+        {{- end -}}
+      </ul>
+    {{- end -}}
+    {{- if and (not $c.details) (eq (len $c.subs) 0) }}<p class="kanban-modal-metarow">No further details. Edit this item where the board is defined.</p>{{ end -}}
+  </div>
+{{- end -}}
+</div>
+
+<script>
+(function(){
+  var root=document.getElementById("{{ $uid }}");if(!root)return;
+  root.querySelectorAll(".kanban-card[data-kb]").forEach(function(c){
+    c.addEventListener("click",function(){window.__kanbanOpen(c);});
+    c.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();window.__kanbanOpen(c);}});
+  });
+})();
+</script>

@@ -1,0 +1,73 @@
+{{- /*
+  Dated archive / log. Pass items as inner YAML — the SAME shape as a kanban
+  item, so you can cut a done card from a board and paste it straight in:
+
+    {{< log >}}
+    - title: Invisalign
+      done: 2025-11-08
+      details: |          # optional note / summary (markdown)
+        Finished Invisalign treatment.
+    - title: "TiDB internals"
+      done: 2026-06-20
+      url: https://…      # optional link
+      details: Learned how TiDB maps SQL to key-value ranges.
+    {{< /log >}}
+
+  Entries are auto-sorted newest-first and grouped under a year heading, so you
+  can paste anywhere and it slots into place. `status` is ignored (everything
+  here is done); only `done`, `title`, `details`, and `url` are used.
+*/ -}}
+
+{{- $page := .Page -}}
+{{- $uid := printf "log%d" .Ordinal -}}
+
+{{- $list := slice -}}
+{{- with (trim .Inner "\n ") -}}
+  {{- $list = resources.FromString (printf "inline-log/%s-%s.yaml" $page.RelPermalink $uid) . | transform.Unmarshal -}}
+{{- end -}}
+
+{{- /* Normalize + add sortable date string and year */ -}}
+{{- $items := slice -}}
+{{- range $list -}}
+  {{- $it := . -}}
+  {{- with .done -}}
+    {{- $dt := time.AsTime . -}}
+    {{- $items = $items | append (dict "title" $it.title "url" $it.url "details" $it.details "dt" $dt "dstr" ($dt.Format "2006-01-02") "year" ($dt.Format "2006")) -}}
+  {{- end -}}
+{{- end -}}
+{{- $items = sort $items "dstr" "desc" -}}
+
+{{- if not ($page.Scratch.Get "logCSS") -}}
+{{- $page.Scratch.Set "logCSS" true -}}
+<style>
+.log-list{--lg-bd:#e3e6ea;--lg-tx:#111827;--lg-mut:#6b7280;--lg-accent:#10b981;margin:.3rem 0}
+.dark .log-list{--lg-bd:#333b4a;--lg-tx:#e5e7eb;--lg-mut:#9ca3af;--lg-accent:#34d399}
+.log-year{font-size:.85rem;font-weight:700;letter-spacing:.03em;color:var(--lg-mut);margin:1rem 0 .3rem;padding-bottom:.2rem;border-bottom:1px solid var(--lg-bd)}
+.log-year:first-child{margin-top:.2rem}
+.log-entry{display:flex;gap:.7rem;padding:.35rem 0;border-bottom:1px solid var(--lg-bd)}
+.log-date{flex:0 0 5.5rem;font-variant-numeric:tabular-nums;font-size:.82rem;color:var(--lg-mut);white-space:nowrap}
+.log-date::before{content:"✔ ";color:var(--lg-accent)}
+.log-body{flex:1;min-width:0}
+.log-title{font-size:.9rem;color:var(--lg-tx);font-weight:600}
+.log-title a{color:var(--lg-tx)}
+.log-note{font-size:.83rem;color:var(--lg-mut);margin-top:.1rem}
+.log-note p{margin:.15rem 0}
+.log-empty{color:var(--lg-mut);font-style:italic}
+</style>
+{{- end -}}
+
+<div class="log-list" id="{{ $uid }}">
+{{- $lastYear := "" -}}
+{{- range $items -}}
+  {{- if ne .year $lastYear -}}<div class="log-year">{{ .year }}</div>{{- $lastYear = .year -}}{{- end -}}
+  <div class="log-entry">
+    <span class="log-date">{{ .dt.Format "Jan 02" }}</span>
+    <div class="log-body">
+      <div class="log-title">{{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }} ↗</a>{{ else }}{{ $page.RenderString (dict "display" "inline") .title }}{{ end }}</div>
+      {{- with .details }}<div class="log-note">{{ . | $page.RenderString }}</div>{{ end -}}
+    </div>
+  </div>
+{{- else -}}
+  <p class="log-empty">Nothing archived yet.</p>
+{{- end -}}
+</div>

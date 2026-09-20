@@ -1,0 +1,103 @@
+# Originals
+
+![](https://images-na.ssl-images-amazon.com/images/I/51hZTkTdS5L._SL200_.jpg)
+
+### Metadata
+
+- Author: Adam Grant
+- Full Title: Originals
+- Category: #books
+
+### Highlights
+
+- “People who suffer the most from a given state of affairs are paradoxically the least likely to question, challenge, reject, or change it.” ([Location 294](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=294))
+    - **Note:** Do not get suffering and resist for creativity
+- The hallmark of originality is rejecting the default and exploring whether a better option exists. ([Location 305](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=305))
+    - **Note:** Explore other options always
+- The starting point is curiosity: pondering why the default exists in the first place. We’re driven to question defaults when we experience vuja de, the opposite of déjà vu. Déjà vu occurs when we encounter something new, but it feels as if we’ve seen it before. Vuja de is the reverse—we face something familiar, but we see it with a fresh perspective that enables us to gain new insights into old problems. ([Location 306](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=306))
+    - **Note:** Curiosity is the most important
+- Although child prodigies are often rich in both talent and ambition, what holds them back from moving the world forward is that they don’t learn to be original. ([Location 339](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=339))
+    - **Note:** Learning creativity is important and cannot be acquired automatically
+- And as much as they seem to crave risk, they really prefer to avoid it. ([Location 454](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=454))
+    - **Tags:** #favorite
+    - **Note:** Entrepreneurs avoid risks as much as possible
+- Entrepreneurs who kept their day jobs had 33 percent lower odds of failure than those who quit. ([Location 462](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=462))
+    - **Note:** We should keep our jobs until it can be seen succeeded
+- Like the Warby Parker crew, the entrepreneurs whose companies topped Fast Company’s recent most innovative lists typically stayed in their day jobs even after they launched. ([Location 464](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=464))
+    - **Note:** Launching something isn't enough to quit their jobs
+- This habit of keeping one’s day job isn’t limited to successful entrepreneurs. Many influential creative minds have stayed in full-time employment or education even after earning income from major projects. ([Location 472](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=472))
+    - **Note:** Earning incoming is very important
+- Having a sense of security in one realm gives us the freedom to be original in another. By covering our bases financially, we escape the pressure to publish half-baked books, sell shoddy art, or launch untested businesses. ([Location 497](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=497))
+    - **Note:** Stable life is very important for creativity and avoid risks for the fear to lose earnings
+- Instead, successful originals take extreme risks in one arena and offset them with extreme caution in another. ([Location 503](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=503))
+    - **Note:** It's important to understand when we should take a risk
+- These are just preferences on a survey, but when you track entrepreneurs’ real-world behavior, it’s clear that they avoid dangerous risks. Economists find that as teenagers, successful entrepreneurs were nearly three times as likely as their peers to break rules and engage in illicit activities. Yet when you take a closer look at the specific behaviors involved, the adolescents who went on to start productive companies were only taking calculated risks. ([Location 541](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=541))
+    - **Note:** Take only calculated risks and avoid dangerous risks
+- engage in illicit activities. Yet when you take a closer look at the specific behaviors involved, the adolescents who went on to start productive companies were only taking calculated risks. When psychologists studied American twins and Swedish citizens, they found the same results. Across all three studies, the people who become successful entrepreneurs were more likely to have teenage histories of defying their parents, staying out past their curfews, skipping school, shoplifting, gambling, drinking alcohol, and smoking marijuana. They were not, however, more likely to engage in hazardous activities like driving drunk, buying illegal ([Location 543](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=543))
+- Across all three studies, the people who become successful entrepreneurs were more likely to have teenage histories of defying their parents, staying out past their curfews, skipping school, shoplifting, gambling, drinking alcohol, and smoking marijuana. They were not, however, more likely to engage in hazardous activities like driving drunk, buying illegal drugs, or stealing valuables. ([Location 546](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=546))
+    - **Note:** Entrepreneurs might have sad experiences but didn't do dangerous actions
+- They are the ones who reluctantly tiptoe to the edge of a cliff, calculate the rate of descent, triple-check their parachutes, and set up a safety net at the bottom just in case. ([Location 551](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=551))
+    - **Note:** Entrepreneurs are very careful
+- If originals aren’t reliable judges of the quality of their ideas, how do they maximize their odds of creating a masterpiece? They come up with a large number of ideas. ([Location 722](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=722))
+    - **Note:** Number of ideas are important for creativity
+- They come up with a large number of ideas. ([Location 723](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=723))
+- Many people fail to achieve originality because they generate a few ideas and then obsess about refining them to perfection. ([Location 753](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=753))
+    - **Note:** Do not rely on a few very specific ideas
+- In the face of uncertainty, our first instinct is often to reject novelty, looking for reasons why unfamiliar concepts might fail. ([Location 796](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=796))
+    - **Note:** Don't reject too much about new ideas
+- As we gain knowledge about a domain, we become prisoners of our prototypes. ([Location 803](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=803))
+    - **Note:** Unlearning is very important
+- “The truth is, most pilots don’t test well,” Warren Littlefield observes, because “audiences do not respond well to things that are new or different.” ([Location 812](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=812))
+    - **Note:** New or different ideas are hard to judge and prone to be criticized
+- When artists assessed one another’s performances, they were about twice as accurate as managers and test audiences in predicting how often the videos would be shared. ([Location 820](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=820))
+- When we evaluate new ideas, we can become better at avoiding false negatives by thinking more like creators. ([Location 834](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=834))
+    - **Note:** How not to criticize too much about new or different ideas. We should evaluate like artists do
+- If we want to increase our odds of betting on the best original ideas, we have to generate our own ideas immediately before we screen others’ suggestions. ([Location 852](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=852))
+    - **Tags:** #favorite
+    - **Note:** How not to criticize too much about new or different ideas. We should evaluate like artists do
+- But the Nobel Prize winners were dramatically more likely to be involved in the arts than less accomplished scientists. ([Location 885](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=885))
+    - **Note:** Learn very different domains
+- The most creative fashion collections came from houses where directors had the greatest experience abroad, but there were three twists. First, time living abroad didn’t matter: it was time working abroad, being actively engaged in design in a foreign country, that predicted whether their new collections were hits. The most original collections came from directors who had worked in two or three different countries. Second, the more the foreign culture differed from that of their native land, the more that experience contributed to the directors’ creativity. An American gained little from working in Canada, compared to the originality dividends of a project in Korea or Japan. But working in multiple countries with different cultures wasn’t enough. The third and most important factor was depth—the amount of time spent working abroad. ([Location 917](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=917))
+    - **Note:** It's important to work in a country with different culture
+- the more the foreign culture differed from that of their native land, the more that experience contributed to the directors’ creativity. ([Location 920](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=920))
+- New research led by Erik Dane shows us why: our intuitions are only accurate in domains where we have a lot of experience. ([Location 942](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=942))
+    - **Note:** When we rely on intuitions
+- Jobs, meanwhile, stuck to his intuition about novelty: “If enough people see the machine, you won’t have to convince them to architect cities around it. People are smart, and it’ll happen.” ([Location 976](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=976))
+    - **Note:** Steve jobs rely on his intuitions
+- When we’re trying to influence others and we discover that they don’t respect us, it fuels a vicious cycle of resentment. ([Location 1153](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1153))
+    - **Note:** I should respect others always even as a leader or a manager
+- In 2009, when Griscom pitched Babble to venture capitalists, he did the exact opposite of what every entrepreneur has been taught to do: he presented a slide listing the top five reasons not to invest in his business. ([Location 1193](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1193))
+    - **Note:** Be open is the best way to convince others
+- But when you’re pitching a novel idea or speaking up with a suggestion for change, your audience is likely to be skeptical. Investors are looking to poke holes in your arguments; managers are hunting for reasons why your suggestion won’t work. Under those circumstances, for at least four reasons, it’s actually more effective to adopt Griscom’s form of powerless communication by accentuating the flaws in your idea. ([Location 1208](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1208))
+    - **Note:** Be open is great to relax other person's attitudes for novel ideas and proposals
+- Under those circumstances, for at least four reasons, it’s actually more effective to adopt Griscom’s form of powerless communication by accentuating the flaws in your idea. ([Location 1209](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1209))
+- Procrastination may be the enemy of productivity, but it can be a resource for creativity. ([Location 1569](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1569))
+    - **Note:** Procrastination is important for creativity
+- Great originals are great procrastinators, but they don’t skip planning altogether. They procrastinate strategically, making gradual progress by testing and refining different possibilities. ([Location 1658](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1658))
+    - **Tags:** #favorite
+    - **Note:** Procrastinate but with a strategy
+- Surprisingly, the downsides of being the first mover are frequently bigger than the upsides. ([Location 1683](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1683))
+    - **Note:** We don't have to be a first mover
+- First-mover advantages tend to prevail when patented technology is involved, or when there are strong network effects ([Location 1742](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1742))
+    - **Note:** The motivation for 1st mover
+- Sprinting is a fine strategy for a young genius, but becoming an old master requires the patience of experimentation to run a marathon. Both are paths to creativity. Yet for those of us who aren’t struck by a bolt of insight, slow and steady experimentation can light the way to a longer stretch of originality. “Of course, not every unaccomplished 65-year-old is some undiscovered experimental innovator,” author Daniel Pink reflects. “But it might bolster the resolve of the relentlessly curious, the constantly tinkering, the dedicated tortoises undaunted by the blur of the hares.” ([Location 1826](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1826))
+    - **Note:** Two ways for creativity
+- “But it might bolster the resolve of the relentlessly curious, the constantly tinkering, the dedicated tortoises undaunted by the blur of the hares.” ([Location 1829](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1829))
+- In a popular TED talk and book, Simon Sinek argues that if we want to inspire people, we should start with why. ([Location 1983](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=1983))
+    - **Note:** Why is important
+- In The Godfather: Part II, Michael Corleone advises, “Keep your friends close, but your enemies closer.” ([Location 2046](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=2046))
+    - **Note:** Enemies are important, and actually really important
+- “Keep your friends close, but your enemies closer.” ([Location 2047](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=2047))
+- To come up with something original, we need to begin from a more unfamiliar place. ([Location 2150](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=2150))
+    - **Note:** We should start with unfamiliar with place
+- When we shift our emphasis from behavior to character, people evaluate choices differently. Instead of asking whether this behavior will achieve the results they want, they take action because it is the right thing to do. ([Location 2598](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=2598))
+    - **Note:** We should do the right thing to do
+- Most people assume it’s better to be a strategic optimist than a defensive pessimist. Yet Norem finds that although defensive pessimists are more anxious and less confident in analytical, verbal, and creative tasks, they perform just as well as strategic optimists. ([Location 3191](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=3191))
+    - **Note:** Defensive pessimists are also important
+- In a series of experiments, Dave Hofmann and I found that the most inspiring way to convey a vision is to outsource it to the people who are actually affected by it. ([Location 3313](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=3313))
+- When Harvard professor John Kotter studied more than one hundred companies trying to institute major changes, he found that the first error they made was failing to establish a sense of urgency. ([Location 3447](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=3447))
+    - **Note:** Urgency is important to tell to members
+- Highlight the reasons not to support your idea. ([Location 3637](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=3637))
+    - **Note:** By creativities
+- Hold an opposite day. ([Location 3685](https://readwise.io/to_kindle?action=open&asin=B00XIYGCDO&location=3685))
+    - **Note:** Consider to opposite something I usually believe

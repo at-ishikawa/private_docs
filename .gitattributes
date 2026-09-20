@@ -1,0 +1,7 @@
+# 1. Encrypt your asset folders completely
+archive/** filter=git-crypt diff=git-crypt
+hugo/content/** filter=git-crypt diff=git-crypt
+
+# 2. Exclude Git config files from formatting
+.gitattributes !filter !diff
+.gitignore !filter !diff
